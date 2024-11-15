@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Strava Receipt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&family=VT323&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="receipt-container">
+        <div class="receipt">
+            <div class="receipt-header">
+                <h2>STRAVA RECEIPT</h2>
+                <p>Last 30 Days of Activities</p>
+                <p>{{ receipt.date }}</p>
+                <p>Receipt #{{ receipt.receipt_no }}</p>
+                <p>Athlete: {{ receipt.athlete_name }}</p>
+                <p>Cashier: {{ receipt.cashier }}</p>
+            </div>
+            
+            <div class="receipt-items">
+                {% for entry in receipt.receipt_items %}
+                <div class="receipt-item">
+                    <span class="item-name">{{ entry.name }}</span>
+                    <span class="item-price">{{ entry.price }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="receipt-footer">
+                {% for message in receipt.footer_messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+                
+                <div class="barcode">
+                    *{{ receipt.receipt_no }}*
+                </div>
+            </div>
+        </div>
+        
+        <button onclick="window.print()" class="print-btn">Print Receipt</button>
+        <a href="{{ url_for('home') }}" class="strava-btn">Generate New Receipt</a>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Strava Receipt Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Strava Receipt Generator</h1>
+        <p>Generate a fun receipt of your last 30 days of activities!</p>
+        <a href="{{ url_for('authorize') }}" class="strava-btn">
+            Connect with Strava
+        </a>
+    </div>
+    <footer class="footer">
+        <p>Made by <a href="https://x.com/ankitkr0" target="_blank">ankit</a></p>
+    </footer>
+</body>
+</html>
+

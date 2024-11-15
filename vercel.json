@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "projectSettings": {
+    "framework": "python",
+    "buildCommand": null,
+    "devCommand": null,
+    "outputDirectory": null
+  },
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
+} 
