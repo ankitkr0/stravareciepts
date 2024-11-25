@@ -1,163 +1,255 @@
 /* static/css/style.css */
-body {
-    font-family: 'VT323', monospace;
-    background: #f7f7fa;
+:root {
+    --primary: #fc4c02;
+    --text: #1a1a1a;
+    --background: #f7f7f7;
+    --card: #ffffff;
+    --border: #e5e5e5;
+}
+
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* Home Page Styles */
+.hero {
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fc4c02 0%, #f76707 100%);
+    color: white;
 }
 
 .container {
-    text-align: center;
     max-width: 600px;
-    width: 90%;
-    padding: 40px 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin: 20px auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.features {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
 }
 
 .strava-btn {
-    background: #FC4C02;
-    color: white;
-    padding: 14px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: white;
+    color: var(--primary);
+    padding: 1rem 2rem;
     text-decoration: none;
-    border-radius: 6px;
-    display: inline-block;
-    margin-top: 24px;
-    font-family: Arial, sans-serif;
-    transition: all 0.3s ease;
+    border-radius: 8px;
     font-weight: 600;
-    box-shadow: 0 2px 4px rgba(252, 76, 2, 0.2);
+    transition: transform 0.2s;
 }
 
 .strava-btn:hover {
-    background: #E34402;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(252, 76, 2, 0.3);
 }
 
+.strava-btn img {
+    height: 24px;
+}
+
+.privacy-note {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Receipt Styles */
 .receipt-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
 }
 
 .receipt {
-    background: white;
-    padding: 30px;
-    width: 300px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 4px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .receipt-header {
     text-align: center;
-    border-bottom: 1px dashed #000;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
-.receipt-header h2 {
-    margin: 0;
-    font-size: 28px;
-    color: #FC4C02;
+.logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
-.receipt-items {
-    margin-bottom: 20px;
+.customer-info {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--background);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.receipt-section {
+    margin-bottom: 2rem;
+}
+
+.receipt-section h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #666;
 }
 
 .receipt-item {
     display: flex;
-    justify-content: space-between;
-    margin: 12px 0;
-    font-size: 18px;
-    line-height: 1.4;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+    font-family: 'Space Mono', monospace;
 }
 
-.item-name {
-    max-width: 70%;
-    word-wrap: break-word;
+.dots {
+    flex: 1;
+    border-bottom: 1px dotted #ccc;
+    margin: 0 0.5rem;
+}
+
+.value {
+    font-weight: 600;
 }
 
 .receipt-footer {
     text-align: center;
-    border-top: 1px dashed #000;
-    padding-top: 20px;
-    font-size: 16px;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px dashed var(--border);
 }
 
-.receipt-footer p {
-    margin: 8px 0;
+.qr-placeholder {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    background: var(--background);
+    border-radius: 8px;
 }
 
-.barcode {
-    font-family: 'Libre Barcode 39', cursive;
-    font-size: 40px;
-    margin-top: 20px;
-    word-wrap: break-word;
+.thank-you {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
-.print-btn {
-    background: #4CAF50;
+.receipt-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.share-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
-.print-btn:hover {
-    background: #45a049;
+.share-btn:hover {
+    background-color: #e44402;
 }
 
-@media print {
-    .print-btn, .strava-btn {
-        display: none;
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
     }
     
+    .receipt {
+        padding: 1.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .feature {
+        font-size: 0.8rem;
+    }
+}
+
+/* Print Styles */
+@media print {
     body {
         background: white;
+    }
+    
+    .receipt-container {
+        margin: 0;
+        padding: 0;
     }
     
     .receipt {
         box-shadow: none;
     }
-}
-
-@media (max-width: 400px) {
-    .receipt {
-        width: 100%;
-        padding: 15px;
-    }
-}
-
-.footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-}
-
-.footer a {
-    color: #FC4C02;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.footer a:hover {
-    color: #E34402;
-}
-
-@media (max-width: 600px) {
-    .footer {
-        margin-top: 30px;
-        padding: 15px;
+    
+    .share-btn {
+        display: none;
     }
 }

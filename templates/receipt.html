@@ -1,45 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Strava Receipt</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&family=VT323&display=swap" rel="stylesheet">
+    <title>Your Strava Year Receipt</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="receipt-container">
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% else %}
         <div class="receipt">
             <div class="receipt-header">
-                <h2>STRAVA RECEIPT</h2>
-                <p>Last 30 Days of Activities</p>
-                <p>{{ receipt.date }}</p>
-                <p>Receipt #{{ receipt.receipt_no }}</p>
-                <p>Athlete: {{ receipt.athlete_name }}</p>
-                <p>Cashier: {{ receipt.cashier }}</p>
+                <div class="logo">🏃‍♂️</div>
+                <h1>YEAR IN REVIEW</h1>
+                <p class="date-range">{{ start_date.strftime('%b %d, %Y') }} - {{ end_date.strftime('%b %d, %Y') }}</p>
             </div>
-            
-            <div class="receipt-items">
-                {% for entry in receipt.receipt_items %}
+
+            <div class="customer-info">
+                <h2>{{ athlete.firstname }} {{ athlete.lastname }}</h2>
+                <p>{{ athlete.city }}, {{ athlete.country }}</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">{{ stats.total_activities }}</span>
+                    <span class="stat-label">Activities</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">{{ "%.1f"|format(stats.total_distance/1000) }}km</span>
+                    <span class="stat-label">Distance</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">{{ stats.total_time_formatted }}</span>
+                    <span class="stat-label">Time</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">{{ "%.0f"|format(stats.total_elevation) }}m</span>
+                    <span class="stat-label">Elevation</span>
+                </div>
+            </div>
+
+            <div class="receipt-section">
+                <h3>Activity Breakdown</h3>
+                {% for type, count in stats.activity_types.items() %}
                 <div class="receipt-item">
-                    <span class="item-name">{{ entry.name }}</span>
-                    <span class="item-price">{{ entry.price }}</span>
+                    <span>{{ type }}</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ count }}</span>
                 </div>
                 {% endfor %}
             </div>
-            
-            <div class="receipt-footer">
-                {% for message in receipt.footer_messages %}
-                <p>{{ message }}</p>
-                {% endfor %}
-                
-                <div class="barcode">
-                    *{{ receipt.receipt_no }}*
+
+            <div class="receipt-section">
+                <h3>Achievements</h3>
+                <div class="receipt-item">
+                    <span>Kudos Received</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ stats.kudos_received }}</span>
                 </div>
+                <div class="receipt-item">
+                    <span>Achievements</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ stats.achievements }}</span>
+                </div>
+            </div>
+
+            <div class="receipt-section">
+                <h3>Personal Records</h3>
+                <div class="receipt-item">
+                    <span>Longest Activity</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ "%.1f"|format(stats.longest_activity/1000) }}km</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Highest Climb</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ "%.0f"|format(stats.highest_elevation) }}m</span>
+                </div>
+            </div>
+
+            <div class="receipt-section">
+                <h3>Average Per Activity</h3>
+                <div class="receipt-item">
+                    <span>Distance</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ "%.1f"|format(stats.avg_distance/1000) }}km</span>
+                </div>
+                <div class="receipt-item">
+                    <span>Duration</span>
+                    <span class="dots"></span>
+                    <span class="value">{{ stats.avg_time_formatted }}</span>
+                </div>
+            </div>
+
+            <div class="receipt-footer">
+                <div class="qr-placeholder"></div>
+                <p class="thank-you">Keep pushing your limits! 💪</p>
+                <p class="receipt-date">Generated on {{ end_date.strftime('%B %d, %Y') }}</p>
             </div>
         </div>
-        
-        <button onclick="window.print()" class="print-btn">Print Receipt</button>
-        <a href="{{ url_for('home') }}" class="strava-btn">Generate New Receipt</a>
+        <button class="share-btn" onclick="window.print()">Save as PDF</button>
+        {% endif %}
     </div>
 </body>
 </html> 

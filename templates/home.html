@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Strava Receipt Generator</title>
+    <title>Strava Year in Review</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Strava Receipt Generator</h1>
-        <p>Generate a fun receipt of your last 30 days of activities!</p>
-        <a href="{{ url_for('authorize') }}" class="strava-btn">
-            Connect with Strava
-        </a>
+    <div class="hero">
+        <div class="container">
+            <h1>Your Strava Year in Review</h1>
+            <p class="subtitle">Get a beautifully designed receipt of your athletic achievements from the past year.</p>
+            <div class="features">
+                <div class="feature">📊 Activity Stats</div>
+                <div class="feature">🏃‍♂️ Personal Records</div>
+                <div class="feature">📈 Progress Insights</div>
+            </div>
+            <a href="{{ url_for('authorize') }}" class="strava-btn">
+                <img src="{{ url_for('static', filename='images/strava-logo.svg') }}" alt="Strava">
+                Connect with Strava
+            </a>
+            <p class="privacy-note">We only access your activity data. No posts will be made to your account.</p>
+        </div>
     </div>
-    <footer class="footer">
-        <p>Made by <a href="https://x.com/ankitkr0" target="_blank">ankit</a></p>
-    </footer>
 </body>
 </html>
 
