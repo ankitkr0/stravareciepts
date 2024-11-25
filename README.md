@@ -6,3 +6,4 @@ A web app that generates a beautiful receipt-style visualization of your Strava 
 
 1. Clone the repository
 2. Create a `.env` file with:
+# stravareciepts
